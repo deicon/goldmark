@@ -14,6 +14,7 @@ import (
 	"gopkg.in/yaml.v3"
 	"regexp"
 	"sort"
+	"strings"
 )
 
 type frontMatterParser struct{}
@@ -33,7 +34,7 @@ func (f frontMatterParser) Open(parent gast.Node, reader text.Reader, pc parser.
 		var y map[interface{}]interface{}
 		for {
 			line, _ = reader.PeekLine()
-			if matched, _ := regexp.Match("^-{3,}", line); !matched {
+			if matched, _ := regexp.Match("^-{3,}$", []byte(strings.TrimRight(string(line), "\r\n"))); !matched {
 
 				buf.Write(line)
 			} else {
