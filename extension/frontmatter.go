@@ -33,7 +33,8 @@ func (f frontMatterParser) Open(parent gast.Node, reader text.Reader, pc parser.
 		var y map[interface{}]interface{}
 		for {
 			line, _ = reader.PeekLine()
-			if matched, _ := regexp.Match("^-{3,}$", line); !matched {
+			if matched, _ := regexp.Match("^-{3,}", line); !matched {
+
 				buf.Write(line)
 			} else {
 				break
